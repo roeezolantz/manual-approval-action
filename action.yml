@@ -1,0 +1,41 @@
+name: 'Manual File Update Approval'
+description: 'Checks if specified files were changed in a PR and requests manual emoji confirmation if not.'
+author: 'roeezolantz'
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
+
+inputs:
+  files:
+    description: 'Comma-separated list of file paths to check (e.g. "changelog.md,version.txt")'
+    required: true
+  emoji:
+    description: 'Emoji reaction to look for as approval (supported: 👍 👎 😄 😕 ❤️ 🎉 🚀 👀)'
+    required: false
+    default: '👍'
+  comment-message:
+    description: >
+      Custom comment template. Use {files} for the file list and {emoji} for the emoji.
+    required: false
+    default: ''
+  required:
+    description: 'If true, timeout without approval fails the check. If false, warns but passes.'
+    required: false
+    default: 'true'
+  poll-interval:
+    description: 'Seconds between reaction polls'
+    required: false
+    default: '10'
+  timeout:
+    description: 'Total seconds to wait for approval before giving up'
+    required: false
+    default: '600'
+  github-token:
+    description: 'GitHub token for API access'
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
