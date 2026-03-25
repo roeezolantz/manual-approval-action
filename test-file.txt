@@ -1,0 +1,2 @@
+This is a dummy change that intentionally does NOT update CHANGELOG.md.
+The action should post a comment and wait for a 🚀 reaction.
